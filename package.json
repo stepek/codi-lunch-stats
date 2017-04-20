@@ -1,0 +1,32 @@
+{
+  "name": "codi-lunch-stats",
+  "version": "0.0.1",
+  "description": "Codi lunch stat.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev-server": "./node_modules/.bin/nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "7.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stepek/codi-lunch-stats.git"
+  },
+  "author": "Kamil Stepczuk <k.stepczuk@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stepek/codi-lunch-stats/issues"
+  },
+  "homepage": "https://github.com/stepek/codi-lunch-stats#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5"
+  }
+}
