@@ -1,7 +1,15 @@
 'use strict';
 
+const types = require('./../models/types').defalut;
 const mongoose = require('mongoose');
 const EventModel = mongoose.model('Events');
+
+const tudel = /^[(\@all)(@here)].*[Tt]udel$/;
+const rollo = /^[(\@all)(@here)].*[Rr]ollo$/;
+const slimak = /^[(\@all)(@here)].*[SsŚś]limak$/;
+const sushi = /^[(\@all)(@here)].*[Ss]ushi$/;
+const flanders = /^[(\@all)(@here)].*[Ff]landers$/;
+const doSyta = /^[(\@all)(@here)].*[Ss]yta?$/;
 
 exports.list = function(req, res) {
   EventModel.find({}, function(err, task) {
@@ -13,11 +21,36 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
   const {body} = req;
+  const msg = body.text.trim();
+
   const newData = {
-    type: body.trigger_word,
     timestamp: body.timestamp,
     triggeredBy: body.user_name
   };
+console.log(types)
+  if (tudel.test(msg)) {
+    newData.type = types.tudel;
+
+  } else if (rollo.test(msg)) {
+    newData.type = types.rollo;
+
+  } else if (slimak.test(msg)) {
+    newData.type = types.slimak;
+
+  } else if (sushi.test(msg)) {
+    newData.type = types.sushi;
+
+  } else if (flanders.test(msg)) {
+    newData.type = types.flanders;
+
+  } else if (doSyta.test(msg)) {
+    newData.type = types.doSyta;
+  } else {
+    res.send('fail');
+    return;
+  }
+
+  console.log(newData)
   const newEvent = new EventModel(newData);
 
   newEvent.save(function(err, task) {

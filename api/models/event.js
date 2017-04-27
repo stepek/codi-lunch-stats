@@ -6,8 +6,14 @@ const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
   type: {
-    type: String,
-    required: true
+    id: {
+      type: String
+    },
+    name: {
+      type: String
+    },
+    type: Object,
+    required: true,
   },
   timestamp: {
     type: Date,
