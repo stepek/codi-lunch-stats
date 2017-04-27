@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, svg {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<svg id="chart"></svg>
+<script>
+  function formatDate(duration) {
+    duration = moment.duration(duration)
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    const seconds = duration.seconds();
+
+    let result = '';
+
+      result += `${hours}-`;
+      result += `${minutes}-`;
+      result += `${seconds}`;
+
+    return result.trim();
+  }
+  function parseTime(timestamp) {
+    const time = moment(timestamp);
+    return time.milliseconds() + time.seconds() * 1000 + time.minutes() * 60 * 1000 + time.hours() * 60 * 60 * 1000
+  }
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      const response = JSON.parse(this.response);
+      const data = [];
+
+      data.push({
+        values: response.filter(item => item.type.id === 'sushi').map(item => ({
+            x: moment(item.timestamp).valueOf(),
+            y: parseTime(item.timestamp)
+          })
+        ).sort((a, b) => a.x - b.x),
+        key: 'Mastersushi',
+        color: "#ff7f0e"
+      },
+        {
+          values: response.filter(item => item.type.id === 'flanders').map(item => ({
+              x: moment(item.timestamp).valueOf(),
+              y: parseTime(item.timestamp)
+            })
+        ).sort((a, b) => a.x - b.x),
+          key: 'Flanders',
+          color: "#09ff00"
+        },
+        {
+          values: response.filter(item => item.type.id === 'doSyta').map(item => ({
+              x: moment(item.timestamp).valueOf(),
+              y: parseTime(item.timestamp)
+            })
+        ).sort((a, b) => a.x - b.x),
+          key: 'Bistro do syta',
+          color: "#0644ff"
+        },
+        {
+          values: response.filter(item => item.type.id === 'tudel').map(item => ({
+              x: moment(item.timestamp).valueOf(),
+              y: parseTime(item.timestamp)
+            })
+        ).sort((a, b) => a.x - b.x),
+          key: 'Tudel',
+          color: "#ffaa00"
+        },
+        {
+          values: response.filter(item => item.type.id === 'rollo').map(item => ({
+              x: moment(item.timestamp).valueOf(),
+              y: parseTime(item.timestamp)
+            })
+        ).sort((a, b) => a.x - b.x),
+          key: 'Mr/Mrs Rollo',
+          color: "#00ffc1"
+        },
+        {
+          values: response.filter(item => item.type.id === 'slimak').map(item => ({
+              x: moment(item.timestamp).valueOf(),
+              y: parseTime(item.timestamp)
+            })
+        ).sort((a, b) => a.x - b.x),
+          key: 'Ślimak',
+          color: "#ff0076"
+        });
+
+      console.log(data)
+      paint(data)
+    }
+  };
+  xhttp.open("GET", "https://codi-lunch-stats.herokuapp.com/events", true);
+  xhttp.send();
+
+  function paint(data) {
+    nv.addGraph({
+      generate: function () {
+        var width = nv.utils.windowSize().width - 40,
+          height = nv.utils.windowSize().height - 40;
+        var chart = nv.models.lineChart()
+          .width(width)
+
+          .useInteractiveGuideline(true)
+          .height(height)
+          .margin({top: 75, right: 75, bottom: 75, left: 75});
+        chart.dispatch.on('renderEnd', function () {
+          console.log('render complete');
+        });
+        chart.xAxis
+          .tickFormat(function(d) {
+            return d3.time.format('%x')(new Date(d))
+          });
+        chart.yAxis
+          .tickFormat(function(d) {
+            return formatDate(d)
+          });
+        d3.select('#chart')
+          .attr('width', width)
+          .attr('height', height)
+          .datum(data)
+          .call(chart);
+        return chart;
+      },
+      callback: function (graph) {
+          /*      window.onresize = function() {
+        var width = nv.utils.windowSize().width - 40,
+          height = nv.utils.windowSize().height - 40,
+          margin = graph.margin();
+        if (width < margin.left + margin.right + 20)
+          width = margin.left + margin.right + 20;
+        if (height < margin.top + margin.bottom + 20)
+          height = margin.top + margin.bottom + 20;
+        graph.width(width).height(height);
+        d3.select('#chart')
+          .attr('width', width)
+          .attr('height', height)
+          .call(graph);
+      };*/
+    }
+  });
+    function sinAndCos
+    () {
+    var sin = [],
+      cos = [];
+    for (
+      var i = 0; i < 100; i++) {
+      sin.push({x: i, y: Math.sin(i/10)});
+      cos.push({x: i, y: .5 * Math.cos(i/10)});
+    }
+      return [
+      {
+        values: sin,
+        key: "Sine Wave",
+        color: "#ff7f0e"
+      },
+      {
+        values: cos,
+        key: "Cosine Wave",
+        color: "#2ca02c",
+        strokeWidth: 1
+      }
+    ];
+  }
+  }
+</script>
+</body>
+</html>

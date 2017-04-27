@@ -20,9 +20,10 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
 const routes = require('./api/routers/event');
 routes(app);
+const viewRouters = require('./view/routers/home');
+viewRouters(app);
 
 app.listen(port);
 
