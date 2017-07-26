@@ -55,15 +55,22 @@
             y: parseTime(item.timestamp)
           })
         ).sort((a, b) => a.x - b.x),
+        avg: Math.round(response.filter(item => item.type.id === 'sushi').map(
+          item => (parseTime(item.timestamp))
+        ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'sushi').length),
         key: 'Mastersushi',
         color: "#f44336"
-      },
+
+        },
         {
           values: response.filter(item => item.type.id === 'flanders').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
             })
         ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'flanders').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'flanders').length),
           key: 'Flanders',
           color: "#3f51b5"
         },
@@ -73,6 +80,9 @@
               y: parseTime(item.timestamp)
             })
         ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'doSyta').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'doSyta').length),
           key: 'Bistro do syta',
           color: "#9c27b0"
         },
@@ -82,6 +92,9 @@
               y: parseTime(item.timestamp)
             })
         ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'tudel').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'tudel').length),
           key: 'Tudel',
           color: "#4caf50"
         },
@@ -91,6 +104,9 @@
               y: parseTime(item.timestamp)
             })
         ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'rollo').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'rollo').length),
           key: 'Mr/Mrs Rollo',
           color: "#ffc107"
         },
@@ -100,6 +116,9 @@
               y: parseTime(item.timestamp)
             })
         ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'slimak').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'slimak').length),
           key: 'Ślimak',
           color: "#ff5722"
         });
@@ -117,13 +136,17 @@
           height = nv.utils.windowSize().height - 40;
         var chart = nv.models.lineChart()
           .width(width)
-
           .useInteractiveGuideline(true)
           .height(height)
           .margin({top: 75, right: 75, bottom: 75, left: 75});
         chart.dispatch.on('renderEnd', function () {
           console.log('render complete');
         });
+        chart.legend.key(
+          function (d) {
+            return `${d.key} | avg:${formatDate(d.avg)}`;
+          }
+        )
         chart.xAxis
           .tickFormat(function(d) {
             return d3.time.format('%d %b %y')(new Date(d))
@@ -156,7 +179,12 @@
       };
     }
   });
+
+    const avgElement = document.getElementById('avg');
+
+    avgElement.innerHTML = 'test'
   }
 </script>
+<div id="avg"></div>
 </body>
 </html>
