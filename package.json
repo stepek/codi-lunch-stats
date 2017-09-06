@@ -16,7 +16,7 @@
     "url": "git+https://github.com/stepek/codi-lunch-stats.git"
   },
   "author": "Kamil Stepczuk <k.stepczuk@hotmail.com>",
-  "license": "MIT",
+  "license": "WTFPL",
   "bugs": {
     "url": "https://github.com/stepek/codi-lunch-stats/issues"
   },
