@@ -55,6 +55,9 @@
     if (this.readyState == 4 && this.status == 200) {
       const response = JSON.parse(this.response);
       const data = [];
+      const timestamps = response.map(item => parseTime(item.timestamp));
+      const minY = Math.min.apply(null, timestamps);
+      const maxY = Math.max.apply(null, timestamps);
 
       data.push({
         values: response.filter(item => item.type.id === 'sushi').map(item => ({
@@ -129,14 +132,14 @@
           key: 'Ślimak',
           color: "#ff5722"
         });
-      paint(data)
+      paint(data, minY, maxY)
       console.log(data)
     }
   };
   xhttp.open("GET", "https://codi-lunch-stats.herokuapp.com/events", true);
   xhttp.send();
 
-  function paint(data) {
+  function paint(data, minY, maxY) {
     nv.addGraph({
       generate: function () {
         var width = nv.utils.windowSize().width - 40,
@@ -145,15 +148,15 @@
           .width(width)
           .useInteractiveGuideline(true)
           .height(height)
-          .margin({top: 75, right: 75, bottom: 75, left: 75});
+          .margin({top: 75, right: 75, bottom: 75, left: 75})
+          .yDomain([minY, maxY]);
         chart.dispatch.on('renderEnd', function () {
-          console.log('render complete');
         });
         chart.legend.key(
           function (d) {
             return `${d.key} | avg:${formatDate(d.avg)}`;
           }
-        )
+        );
         chart.xAxis
           .tickFormat(function(d) {
             return d3.time.format('%d %b %y')(new Date(d))
