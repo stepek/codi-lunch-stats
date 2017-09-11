@@ -25,6 +25,9 @@
             bottom: 0;
             left: 1em;
         }
+        .dashed {
+            stroke-dasharray: 5, 5;
+        }
     </style>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
@@ -73,6 +76,19 @@
 
         },
         {
+          values: trendcords(response.filter(item => item.type.id === 'sushi').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'sushi').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'sushi').length),
+          key: 'Mastersushi Trend',
+          color: "#f44336",
+          classed: 'dashed'
+        },
+        {
           values: response.filter(item => item.type.id === 'flanders').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -83,6 +99,19 @@
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'flanders').length),
           key: 'Flanders',
           color: "#3f51b5"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'flanders').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'flanders').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'flanders').length),
+          key: 'Flanders Trend',
+          color: "#3f51b5",
+          classed: 'dashed'
         },
         {
           values: response.filter(item => item.type.id === 'doSyta').map(item => ({
@@ -97,6 +126,19 @@
           color: "#9c27b0"
         },
         {
+          values: trendcords(response.filter(item => item.type.id === 'doSyta').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'doSyta').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'doSyta').length),
+          key: 'Bistro do syta Trend',
+          color: "#9c27b0",
+          classed: 'dashed'
+        },
+        {
           values: response.filter(item => item.type.id === 'tudel').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -107,6 +149,19 @@
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'tudel').length),
           key: 'Tudel',
           color: "#4caf50"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'tudel').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'tudel').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'tudel').length),
+          key: 'Tudel Trend',
+          color: "#4caf50",
+          classed: 'dashed'
         },
         {
           values: response.filter(item => item.type.id === 'rollo').map(item => ({
@@ -121,21 +176,79 @@
           color: "#ffc107"
         },
         {
+          values: trendcords(response.filter(item => item.type.id === 'rollo').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'rollo').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'rollo').length),
+          key: 'Mr/Mrs Rollo Trend',
+          color: "#ffc107",
+          classed: 'dashed'
+        },
+        {
           values: response.filter(item => item.type.id === 'slimak').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
             })
-        ).sort((a, b) => a.x - b.x),
+          ).sort((a, b) => a.x - b.x),
           avg: Math.round(response.filter(item => item.type.id === 'slimak').map(
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'slimak').length),
           key: 'Ślimak',
           color: "#ff5722"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'slimak').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'slimak').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'slimak').length),
+          key: 'Ślimak Trend',
+          color: "#ff5722",
+          classed: 'dashed'
         });
       paint(data, minY, maxY)
-      console.log(data)
     }
   };
+  function trendcords(data) {
+    var leastSquaresCoeff = leastSquares(d3.range(1, data.length, 1), data.map(item => parseFloat(item.y)));
+
+    const x1 = data[0].x;
+    const y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
+    const x2 = data[data.length -1].x;
+    const y2 = leastSquaresCoeff[0] * data.length + leastSquaresCoeff[1];
+
+    return [{x: x1, y: y1}, {x: x2, y: y2}]
+  }
+
+  function leastSquares(xSeries, ySeries) {
+    var reduceSumFunc = function(prev, cur) { return prev + cur; };
+
+    var xBar = xSeries.reduce(reduceSumFunc) * 1 / xSeries.length;
+    var yBar = ySeries.reduce(reduceSumFunc) * 1 / ySeries.length;
+    console.log(xBar, yBar);
+    var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
+      .reduce(reduceSumFunc);
+
+    var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
+      .reduce(reduceSumFunc);
+
+    var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
+      .reduce(reduceSumFunc);
+
+    var slope = ssXY / ssXX;
+    var intercept = yBar - (xBar * slope);
+    var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+
+    return [slope, intercept, rSquare];
+  }
+
   xhttp.open("GET", "https://codi-lunch-stats.herokuapp.com/events", true);
   xhttp.send();
 
