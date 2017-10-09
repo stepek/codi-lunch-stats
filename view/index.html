@@ -212,6 +212,31 @@
           key: 'Ślimak Trend',
           color: "#ff5722",
           classed: 'dashed'
+        },
+        {
+          values: response.filter(item => item.type.id === 'qchnia').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'qchnia').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'qchnia').length),
+          key: 'Qchnia',
+          color: "#ff00ff"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'qchnia').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'qchnia').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'qchnia').length),
+          key: 'Qchnia Trend',
+          color: "#ff00ff",
+          classed: 'dashed'
         });
       paint(data, minY, maxY)
     }

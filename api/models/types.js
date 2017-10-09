@@ -22,5 +22,9 @@ exports.defalut = Object.freeze({
   doSyta: {
     id: 'doSyta',
     name: 'Bistro do syta'
+  },
+  qchnia: {
+    id: 'qchnia',
+    name: 'Qchnia'
   }
 });

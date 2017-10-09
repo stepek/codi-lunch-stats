@@ -10,6 +10,8 @@ const slimak = /^[(\@all)(@here)].*[SsŚś]limak$/;
 const sushi = /^[(\@all)(@here)].*[Ss]ushi$/;
 const flanders = /^[(\@all)(@here)].*[Ff]landers$/;
 const doSyta = /^[(\@all)(@here)].*[Ss]yta?$/;
+const qchnia = /^[(\@all)(@here)].*[Qq]chnia$/;
+
 
 exports.list = function(req, res) {
   EventModel.find({}, function(err, task) {
@@ -27,7 +29,7 @@ exports.create = function(req, res) {
     timestamp: body.timestamp,
     triggeredBy: body.user_name
   };
-console.log(types)
+
   if (tudel.test(msg)) {
     newData.type = types.tudel;
 
@@ -45,12 +47,13 @@ console.log(types)
 
   } else if (doSyta.test(msg)) {
     newData.type = types.doSyta;
+  } else if (qchnia.test(msg)) {
+    newData.type = types.qchnia;
   } else {
     res.send('fail');
     return;
   }
 
-  console.log(newData)
   const newEvent = new EventModel(newData);
 
   newEvent.save(function(err, task) {
