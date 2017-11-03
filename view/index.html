@@ -309,6 +309,7 @@
           height = nv.utils.windowSize().height - 40;
         var chart = nv.models.lineChart()
           .width(width)
+          .interpolate("monotone")
           .useInteractiveGuideline(true)
           .height(height)
           .margin({top: 75, right: 75, bottom: 75, left: 75})
