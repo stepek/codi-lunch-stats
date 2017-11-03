@@ -11,6 +11,7 @@ const sushi = /^[(\@all)(@here)].*[Ss]ushi$/;
 const flanders = /^[(\@all)(@here)].*[Ff]landers$/;
 const doSyta = /^[(\@all)(@here)].*[Ss]yta?$/;
 const qchnia = /^[(\@all)(@here)].*[Qq]chnia$/;
+const pajda = /^[(\@all)(@here)].*[Pp][Aa][Jj][Dd][Aa]$/;
 
 
 exports.list = function(req, res) {
@@ -49,6 +50,8 @@ exports.create = function(req, res) {
     newData.type = types.doSyta;
   } else if (qchnia.test(msg)) {
     newData.type = types.qchnia;
+  } else if (pajda.test(msg)) {
+    newData.type = types.pajda;
   } else {
     res.send('fail');
     return;
