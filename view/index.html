@@ -239,6 +239,80 @@
           classed: 'dashed'
         },
         {
+          values: response.filter(item => item.type.id === 'pobudka').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'pobudka').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'pobudka').length),
+          key: 'Pobudka',
+          color: "#ff51ff"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'pobudka').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'pobudka').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'pobudka').length),
+          key: 'Pobudka Trend',
+          color: "#ff51ff",
+          classed: 'dashed'
+        },{
+          values: response.filter(item => item.type.id === 'maksmak').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'maksmak').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'maksmak').length),
+          key: 'Maksmak',
+          color: "#ff0033"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'maksmak').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'maksmak').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'maksmak').length),
+          key: 'Maksmak Trend',
+          color: "#ff0033",
+          classed: 'dashed'
+        },
+        {
+          values: response.filter(item => item.type.id === 'moreish').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'moreish').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'moreish').length),
+          key: 'Moreish',
+          color: "#1100ff"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'moreish').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'moreish').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'moreish').length),
+          key: 'Moreish Trend',
+          color: "#1100ff",
+          classed: 'dashed'
+        },
+        {
           values: response.filter(item => item.type.id === 'pajda').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
