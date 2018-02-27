@@ -27,6 +27,18 @@ exports.defalut = Object.freeze({
     id: 'qchnia',
     name: 'Qchnia'
   },
+  pobudka: {
+    id: 'pobudka',
+    name: 'Pobudka'
+  },
+  maksmak: {
+    id: 'maksmak',
+    name: 'Maksmak'
+  },
+  moreish: {
+    id: 'moreish',
+    name: 'Moreish'
+  },
   pajda: {
     id: 'pajda',
     name: 'PAJDA'

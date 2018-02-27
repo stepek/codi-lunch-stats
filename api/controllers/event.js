@@ -12,6 +12,9 @@ const flanders = /^[(\@all)(@here)].*[Ff]landers$/;
 const doSyta = /^[(\@all)(@here)].*[Ss]yta?$/;
 const qchnia = /^[(\@all)(@here)].*[Qq]chnia$/;
 const pajda = /^[(\@all)(@here)].*[Pp][Aa][Jj][Dd][Aa]$/;
+const pobudka = /^[(\@all)(@here)].*[Pp]obudka$/;
+const maksmak = /^[(\@all)(@here)].*[Mm]aksmak$/;
+const moreish = /^[(\@all)(@here)].*[Mm]oreish$/;
 
 
 exports.list = function(req, res) {
@@ -52,6 +55,12 @@ exports.create = function(req, res) {
     newData.type = types.qchnia;
   } else if (pajda.test(msg)) {
     newData.type = types.pajda;
+  } else if (pobudka.test(msg)) {
+    newData.type = types.pobudka;
+  } else if (maksmak.test(msg)) {
+    newData.type = types.maksmak;
+  } else if (moreish.test(msg)) {
+    newData.type = types.moreish;
   } else {
     res.send('fail');
     return;
