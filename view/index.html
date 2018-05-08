@@ -62,7 +62,8 @@
       const minY = Math.min.apply(null, timestamps);
       const maxY = Math.max.apply(null, timestamps);
 
-      data.push({
+      data.push(
+        {
         values: response.filter(item => item.type.id === 'sushi').map(item => ({
             x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
             y: parseTime(item.timestamp)
@@ -88,7 +89,7 @@
           color: "#f44336",
           classed: 'dashed'
         },
-        {
+        /*{
           values: response.filter(item => item.type.id === 'flanders').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -112,7 +113,7 @@
           key: 'Flanders Trend',
           color: "#3f51b5",
           classed: 'dashed'
-        },
+        },*/
         {
           values: response.filter(item => item.type.id === 'doSyta').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
@@ -138,7 +139,7 @@
           color: "#9c27b0",
           classed: 'dashed'
         },
-        {
+        /*{
           values: response.filter(item => item.type.id === 'tudel').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -162,8 +163,8 @@
           key: 'Tudel Trend',
           color: "#4caf50",
           classed: 'dashed'
-        },
-        {
+        },*/
+        /*{
           values: response.filter(item => item.type.id === 'rollo').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -187,8 +188,8 @@
           key: 'Mr/Mrs Rollo Trend',
           color: "#ffc107",
           classed: 'dashed'
-        },
-        {
+        },*/
+/*        {
           values: response.filter(item => item.type.id === 'slimak').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -212,7 +213,7 @@
           key: 'Ślimak Trend',
           color: "#ff5722",
           classed: 'dashed'
-        },
+        },*/
         {
           values: response.filter(item => item.type.id === 'qchnia').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
@@ -287,7 +288,7 @@
           color: "#ff0033",
           classed: 'dashed'
         },
-        {
+        /*{
           values: response.filter(item => item.type.id === 'moreish').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -311,8 +312,8 @@
           key: 'Moreish Trend',
           color: "#1100ff",
           classed: 'dashed'
-        },
-        {
+        },*/
+        /*{
           values: response.filter(item => item.type.id === 'pajda').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -336,7 +337,8 @@
           key: 'PAJDA Trend',
           color: "#00afff",
           classed: 'dashed'
-        });
+        }*/
+        );
       paint(data, minY, maxY)
     }
   };
