@@ -224,7 +224,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'qchnia').length),
           key: 'Qchnia',
-          color: "#ff00ff"
+          color: "#795548"
         },
         {
           values: trendcords(response.filter(item => item.type.id === 'qchnia').map(item => ({
@@ -236,7 +236,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'qchnia').length),
           key: 'Qchnia Trend',
-          color: "#ff00ff",
+          color: "#795548",
           classed: 'dashed'
         },
         {
@@ -249,7 +249,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'pobudka').length),
           key: 'Pobudka',
-          color: "#ff51ff"
+          color: "#FFC107"
         },
         {
           values: trendcords(response.filter(item => item.type.id === 'pobudka').map(item => ({
@@ -261,7 +261,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'pobudka').length),
           key: 'Pobudka Trend',
-          color: "#ff51ff",
+          color: "#FFC107",
           classed: 'dashed'
         },{
           values: response.filter(item => item.type.id === 'maksmak').map(item => ({
@@ -273,7 +273,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'maksmak').length),
           key: 'Maksmak',
-          color: "#ff0033"
+          color: "#CDDC39"
         },
         {
           values: trendcords(response.filter(item => item.type.id === 'maksmak').map(item => ({
@@ -285,7 +285,7 @@
             item => (parseTime(item.timestamp))
           ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'maksmak').length),
           key: 'Maksmak Trend',
-          color: "#ff0033",
+          color: "#CDDC39",
           classed: 'dashed'
         },
         /*{
