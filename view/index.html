@@ -263,7 +263,8 @@
           key: 'Pobudka Trend',
           color: "#FFC107",
           classed: 'dashed'
-        },{
+        },
+        {
           values: response.filter(item => item.type.id === 'maksmak').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
@@ -288,7 +289,56 @@
           color: "#CDDC39",
           classed: 'dashed'
         },
-        /*{
+        {
+          values: response.filter(item => item.type.id === 'hagiel').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'hagiel').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'hagiel').length),
+          key: 'Hagiel Bistro',
+          color: "#1100ff"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'hagiel').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'hagiel').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'hagiel').length),
+          key: 'agiel Bistro',
+          color: "#1100ff",
+          classed: 'dashed'
+        },
+        {
+          values: response.filter(item => item.type.id === 'rajskie').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x),
+          avg: Math.round(response.filter(item => item.type.id === 'rajskie').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'rajskie').length),
+          key: 'Rajskie Smaki',
+          color: "#00afff"
+        },
+        {
+          values: trendcords(response.filter(item => item.type.id === 'rajskie').map(item => ({
+              x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
+              y: parseTime(item.timestamp)
+            })
+          ).sort((a, b) => a.x - b.x)),
+          avg: Math.round(response.filter(item => item.type.id === 'rajskie').map(
+            item => (parseTime(item.timestamp))
+          ).reduce((a, b) => a + b)/response.filter(item => item.type.id === 'rajskie').length),
+          key: 'Rajskie Smaki',
+          color: "#00afff",
+          classed: 'dashed'
+        },        /*{
           values: response.filter(item => item.type.id === 'moreish').map(item => ({
               x: moment(item.timestamp).valueOf() - parseTime(item.timestamp),
               y: parseTime(item.timestamp)
