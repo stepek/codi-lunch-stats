@@ -42,5 +42,14 @@ exports.defalut = Object.freeze({
   pajda: {
     id: 'pajda',
     name: 'PAJDA'
+  },
+  hagiel: {
+    id: 'hagiel',
+    name: 'Hagiel Bistro'
+  },
+  rajskie: {
+    id: 'rajskie',
+    name: 'Rajskie Smaki'
   }
+
 });

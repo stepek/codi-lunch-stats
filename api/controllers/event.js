@@ -15,6 +15,8 @@ const pajda = /^[(\@all)(@here)].*[Pp][Aa][Jj][Dd][Aa]$/;
 const pobudka = /^[(\@all)(@here)].*[Pp]obudka$/;
 const maksmak = /^[(\@all)(@here)].*[Mm]aksmak$/;
 const moreish = /^[(\@all)(@here)].*[Mm]oreish$/;
+const hagiel = /(^[(\@all)(@here)].*[Hh]agiel$)|(^[(\@all)(@here)].*[Hh]agiel [Bb]istro$)/;
+const rajskie = /(^[(\@all)(@here)].*[Rr]ajskie$)|(^[(\@all)(@here)].*[Rr]ajskie [Ss]maki$)/;
 
 
 exports.list = function(req, res) {
@@ -61,6 +63,10 @@ exports.create = function(req, res) {
     newData.type = types.maksmak;
   } else if (moreish.test(msg)) {
     newData.type = types.moreish;
+  } else if (hagiel.test(msg)) {
+    newData.type = types.hagiel;
+  } else if (rajskie.test(msg)) {
+    newData.type = types.rajskie;
   } else {
     res.send('fail');
     return;
