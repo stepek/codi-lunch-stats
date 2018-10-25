@@ -406,17 +406,17 @@
   function leastSquares(xSeries, ySeries) {
     var reduceSumFunc = function(prev, cur) { return prev + cur; };
 
-    var xBar = xSeries.reduce(reduceSumFunc) * 1 / xSeries.length;
-    var yBar = ySeries.reduce(reduceSumFunc) * 1 / ySeries.length;
+    var xBar = xSeries.reduce(reduceSumFunc, 0) * 1 / xSeries.length;
+    var yBar = ySeries.reduce(reduceSumFunc, 0) * 1 / ySeries.length;
     console.log(xBar, yBar);
     var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
-      .reduce(reduceSumFunc);
+      .reduce(reduceSumFunc, 0);
 
     var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
-      .reduce(reduceSumFunc);
+      .reduce(reduceSumFunc, 0);
 
     var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
-      .reduce(reduceSumFunc);
+      .reduce(reduceSumFunc, 0);
 
     var slope = ssXY / ssXX;
     var intercept = yBar - (xBar * slope);
