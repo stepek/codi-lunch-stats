@@ -393,6 +393,11 @@
     }
   };
   function trendcords(data) {
+    if (data.length < 2) {
+      return [
+
+      ]
+    }
     var leastSquaresCoeff = leastSquares(d3.range(1, data.length, 1), data.map(item => parseFloat(item.y)));
 
     const x1 = data[0].x;
