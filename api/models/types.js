@@ -1,4 +1,4 @@
-exports.defalut = Object.freeze({
+exports.default = Object.freeze({
   tudel: {
     id: 'tudel',
     name: 'Tudel'
