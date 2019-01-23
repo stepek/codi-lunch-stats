@@ -2,8 +2,10 @@
 const path = require('path');
 
 module.exports = function(app) {
-  app.route('/')
+  app.route('/*')
     .get(function (req,res) {
-      res.sendFile(path.join(__dirname + '/../index.html'));
+      var uid = req.params.uid,
+        path = req.params[0] ? req.params[0] : 'index.html';
+      res.sendfile(path, {root: './webui/build/'});
     })
 };
