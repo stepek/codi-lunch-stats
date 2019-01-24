@@ -53,7 +53,14 @@ class App extends Component {
           <Tooltip formatter={this.tooltipFormatter} labelFormatter={this.tooltipLabelFormatter} />
           <Legend />
           {Object.keys(this.state.legend).map((key, i) => (
-            <Line key={key} name={this.state.legend[key]} type="monotone" dataKey={key} stroke={colors.A400[i+1]}/>
+            <Line
+              key={key}
+              name={this.state.legend[key]}
+              type="monotone" dataKey={key}
+              stroke={colors['700'][i+1]}
+              dot={false}
+              connectNulls={true}
+            />
           ))}
         </LineChart>
       </div>
