@@ -49,7 +49,7 @@ class App extends Component {
                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" tickFormatter={this.formatDate} />
-          <YAxis tickFormatter={this.formatTime}/>
+          <YAxis tickFormatter={this.formatTime} domain={['dataMin', 'dataMax']}/>
           <Tooltip formatter={this.tooltipFormatter} labelFormatter={this.tooltipLabelFormatter} />
           <Legend />
           {Object.keys(this.state.legend).map((key, i) => (
