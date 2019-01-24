@@ -13,14 +13,14 @@ exports.create = function(req, res) {
 
     const modelsToSave = providers
       .filter(function(item) {
-        return RegExp(item.regex).test(req.body.msg);
+        return RegExp(item.regex).test(req.body.text);
       })
       .map(function(item) {
 
         return Object.assign({}, {
-          triggerMessage: req.body.msg,
-          triggeredBy: req.body.u.username,
-          timestamp: req.body.ts,
+          triggerMessage: req.body.text,
+          triggeredBy: req.body.user_name,
+          timestamp: req.body.timestamp,
           foodProvider: item._id,
         });
       });
