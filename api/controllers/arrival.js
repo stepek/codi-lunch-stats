@@ -45,8 +45,14 @@ exports.list = function(req, res) {
 };
 
 exports.chart = function(req, res) {
+  const lte = req.query.lte;
+
   FoodProvider
-    .find({active: true, 'view.chart': true}, '_id title')
+    .find({
+      active: true,
+      'view.chart': true,
+      timestamp: lte ? {$lte: lte} : undefined
+    }, '_id title')
     .exec(function(err, providers) {
       Arrival
         .find({foodProvider: {$in: providers}})
