@@ -51,7 +51,7 @@ exports.chart = function(req, res) {
     .find({
       active: true,
       'view.chart': true,
-      timestamp: lte ? {$lte: lte} : undefined
+      timestamp: lte ? {$lte: new Date(lte)} : undefined
     }, '_id title')
     .exec(function(err, providers) {
       Arrival
