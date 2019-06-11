@@ -430,7 +430,7 @@
     return [slope, intercept, rSquare];
   }
 
-  xhttp.open("GET", "https://codi-lunch-stats.herokuapp.com/events", true);
+  xhttp.open("GET", "/events", true);
   xhttp.send();
 
   function paint(data, minY, maxY) {
