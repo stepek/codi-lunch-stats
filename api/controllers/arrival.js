@@ -102,13 +102,13 @@ exports.update = function (req, res) {
 };
 
 function getTime(timestamp) {
-  const time = moment(timestamp);
+  const time = moment(timestamp).utc();
   return time.milliseconds() + time.seconds() * 1000 + time.minutes() * 60 * 1000 + time.hours() * 60 * 60 * 1000
 }
 
 function parseData(data) {
   return data.reduce(function(result, item) {
-    const date = moment(item.timestamp).valueOf() - getTime(item.timestamp);
+    const date = moment(item.timestamp).utc().valueOf() - getTime(item.timestamp);
     const time = getTime(item.timestamp);
     const existingRow = result.find(function(item){
       return item.date === date;
