@@ -10,10 +10,10 @@ exports.create = function(req, res) {
     if (err) {
       res.send(err);
     }
-
+    const text = req.body.text.trim();
     const modelsToSave = providers
       .filter(function(item) {
-        return RegExp(item.regex).test(req.body.text);
+        return RegExp(item.regex).test(text);
       })
       .map(function(item) {
 
@@ -48,14 +48,13 @@ exports.chart = function(req, res) {
   const lte = req.query.lte;
 
   FoodProvider
-    .find({
-      active: true,
-      'view.chart': true,
-      timestamp: lte ? {$lte: new Date(lte)} : undefined
-    }, '_id title')
+    .find({active: true, 'view.chart': true}, '_id title')
     .exec(function(err, providers) {
       Arrival
-        .find({foodProvider: {$in: providers}})
+        .find({
+          foodProvider: {$in: providers},
+          timestamp: lte ? {$gte: new Date(Number(lte))} : void(0)
+        })
         .sort({timestamp: 1})
         .exec(function(err, task) {
           if (err)
