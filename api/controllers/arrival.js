@@ -102,7 +102,12 @@ exports.update = function (req, res) {
 };
 
 function getTime(timestamp) {
-  const time = moment(timestamp);
+  let time = moment(timestamp);
+
+  //if (moment().isDST()) {
+    time = time.add(1,'h');
+  //}
+
   return time.milliseconds() + time.seconds() * 1000 + time.minutes() * 60 * 1000 + time.hours() * 60 * 60 * 1000
 }
 
