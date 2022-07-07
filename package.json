@@ -28,7 +28,7 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-query-parser": "^1.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.3.13",
     "node-fetch": "^2.3.0"
   }
