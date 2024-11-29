@@ -29,7 +29,7 @@
     "express": "^4.15.2",
     "express-query-parser": "^1.0.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.3.13",
+    "mongoose": "^5.4.10",
     "node-fetch": "^2.3.0"
   }
 }
